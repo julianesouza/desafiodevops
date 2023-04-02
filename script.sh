@@ -13,5 +13,5 @@ sudo apt-get -y update
 sudo apt-get install -y docker-ce
 sudo apt install -y docker-compose
 sudo usermod -aG docker $USER
-cd desafiodevops/app
+cd app
 docker-compose up
