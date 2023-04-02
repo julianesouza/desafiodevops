@@ -14,4 +14,4 @@ sudo apt-get install -y docker-ce
 sudo apt install -y docker-compose
 sudo usermod -aG docker $USER
 cd app
-docker-compose up
+sudo docker-compose up
