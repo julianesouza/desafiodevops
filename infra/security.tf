@@ -1,13 +1,7 @@
 resource "aws_security_group" "instance" {
   name_prefix = "instance-sg"
 
-# abre portas 22 e 80
-  ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
+# abre porta 80
   ingress {
     from_port   = 80
     to_port     = 80
