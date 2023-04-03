@@ -24,10 +24,22 @@ resource "aws_instance" "helloworld" {
 
   user_data = <<-EOF
               #!/bin/bash
+              sudo apt-get -y install \
+              ca-certificates \
+              curl \
+              gnupg
+              sudo mkdir -m 0755 -p /etc/apt/keyrings
+              curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg &&
+              echo \
+              "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/u$  "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
+              sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+              sudo apt-get -y update
+              sudo apt-get install -y docker-ce
+              sudo apt install -y docker-compose
+              sudo usermod -aG docker $USER
               git clone https://github.com/julianesouza/desafiodevops.git
-              cd desafiodevops
-              sudo chmod +x script.sh
-              ./script.sh
+              cd desafiodevops/app
+              sudo docker-compose up
               EOF
 
   tags = {
